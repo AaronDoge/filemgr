@@ -1,14 +1,16 @@
 # Instructions
+
 > 对`ufile-gosdk`进行简单封装。
 
 ## 文件操作
 
 ### NewClient
 ```go
-func NewClient(namespace, key string, regions ...string) (*Client, error)
+func NewClient(namespace, key string, fileHost, regions ...string) (*Client, error)
 ```
-- namespace：命名空间，需要提前注册；
-- key：命名空间的token；
+- namespace：命名空间，需要提前注册，测试为：nstest_1；
+- key：命名空间的token，测试为：\*；
+- fileHost：文件服务地址，测试环境为："http://192.168.152.186:8000/filemgr"；
 - region：区域，这个参数不传或传入空字符串，会使用默认值。
 
 ### Upload
