@@ -9,7 +9,10 @@ import (
 	"github.com/ufilesdk-dev/ufile-gosdk"
 )
 
-const base_format = "Jan 2 15:04:05 2006"
+const (
+    base_format = "Jan 2 15:04:05 2006"
+    std_format = "2006-01-02 15:04:05"
+)
 
 type FileInfo struct {
 	FName 	string
@@ -92,8 +95,9 @@ func (c *Client) ListAll() (flist []FileInfo, err error) {
 		fi.NSpace = ns
 		fi.FName = tmp[len(tmp)-1]
 		fi.FSize = v.Size
-		fi.MTime =  time.Unix(int64(v.ModifyTime), 0).Format(base_format)
-		fmt.Printf("%s	%d	%s	%s\n", ns, fi.FSize, fi.MTime, fi.FName)
+		MTimeOS :=  time.Unix(int64(v.ModifyTime), 0).Format(base_format)
+		fi.MTime =  time.Unix(int64(v.ModifyTime), 0).Format(std_format)
+		fmt.Printf("%s	%d	%s	%s\n", ns, fi.FSize, MTimeOS, fi.FName)
 
 		flist = append(flist, fi)
 		count++
